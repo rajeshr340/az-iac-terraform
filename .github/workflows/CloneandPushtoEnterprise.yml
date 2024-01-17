@@ -41,4 +41,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT }}    
       run: |
         cd cloned-repo       
-        git push -u enterprise main -f
+        git push -u enterprise ${{github.head_ref}} -f
