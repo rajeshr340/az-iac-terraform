@@ -32,7 +32,7 @@ jobs:
         git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
         git clone --branch Dev "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git" kyn-cloned-repo
 
-        cp ./client-cloned-repo/iac/* ./kyn-cloned-repo/iac
+        cp -r ./client-cloned-repo/iac/* ./kyn-cloned-repo/iac
 
     - name: Set up Git for Enterprise
       run: |
