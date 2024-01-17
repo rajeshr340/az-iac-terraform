@@ -53,4 +53,5 @@ jobs:
         git config user.email "rajesh.r11@kyndryl.com"
         git add .
         git commit -m "iac folder updated"
-        git push enterprise ${{github.head_ref}}:Dev -f
+        #git push enterprise ${{github.head_ref}}:Dev -f
+        git push enterprise Dev -f
