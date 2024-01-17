@@ -36,7 +36,7 @@ jobs:
         cd cloned-repo
         pwd
         ls
-        mkdir temp
+        mkdir client
         mv iac temp                          
         git remote add enterprise "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
 
