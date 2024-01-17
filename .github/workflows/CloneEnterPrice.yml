@@ -2,9 +2,9 @@ name: Clone and Push to Enterprise
 
 on:
  workflow_dispatch: 
-#  pull_request: 
-#   types: 
-#     - opened
+ pull_request: 
+  types: 
+    - opened
 
 jobs:
   clone-and-push:
@@ -29,11 +29,14 @@ jobs:
     - name: Clone repository
       run: |
         REPO_NAME=$(basename $GITHUB_REPOSITORY)
-        git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" cloned-repo
+        git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
+        git clone --branch Dev "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git" kyn-cloned-repo
+
+        cp ./client-cloned-repo/iac/* ./kyn-cloned-repo/iac
 
     - name: Set up Git for Enterprise
       run: |
-        cd cloned-repo
+        cd kyn-cloned-repo
         pwd
         ls
         mkdir client
@@ -44,10 +47,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT }}    
       run: |
-        cd cloned-repo       
+        cd kyn-cloned-repo       
         # #git push -u enterprise -f
         git config user.name "rajeshr7"
         git config user.email "rajesh.r11@kyndryl.com"
-        git add temp
+        git add .
         git commit -m "iac folder updated"
         git push enterprise ${{github.head_ref}}:Dev -f
