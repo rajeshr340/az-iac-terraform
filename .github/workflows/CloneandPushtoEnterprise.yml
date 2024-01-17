@@ -35,7 +35,7 @@ jobs:
       run: |
         cd cloned-repo
         pwd
-        ls                       
+        ls                          
         git remote add enterprise "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
 
     - name: Push to Enterprise repository
@@ -44,8 +44,8 @@ jobs:
       run: |
         cd cloned-repo       
         # #git push -u enterprise -f
-        # git config user.name "rajeshr7"
-        # git config user.email "rajesh.r11@kyndryl.com"
-        # git add iac
-        # git commit -m "iac folder updated"
+        git config user.name "rajeshr7"
+        git config user.email "rajesh.r11@kyndryl.com"
+        git add iac
+        git commit -m "iac folder updated"
         git push enterprise ${{github.head_ref}}:Dev -f
