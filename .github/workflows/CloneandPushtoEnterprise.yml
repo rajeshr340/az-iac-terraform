@@ -34,6 +34,10 @@ jobs:
     - name: Set up Git for Enterprise
       run: |
         cd cloned-repo
+        mkdir terraform-code
+        cd terraform-code
+        echo "sample.txt ">>sample.txt        
+        echo "sample.txt ">>sample2.txt        
         git remote add enterprise "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
 
     - name: Push to Enterprise repository
@@ -41,4 +45,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT }}    
       run: |
         cd cloned-repo       
-        git push -u enterprise Dev -f
+        #git push -u enterprise -f
+        git config user.name "rajeshr7"
+        git config user.email "rajesh.r11@kyndryl.com"
+        git add .
+        git commit -m "message"
+        git push enterprise ${{github.head_ref}}:Dev -f
