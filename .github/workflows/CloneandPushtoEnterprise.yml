@@ -36,7 +36,8 @@ jobs:
         cd cloned-repo
         mkdir terraform-code
         cd terraform-code
-        echo "sample.txt">>sample.txt        
+        echo "sample.txt ">>sample.txt        
+        echo "sample.txt ">>sample2.txt        
         git remote add enterprise "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
 
     - name: Push to Enterprise repository
