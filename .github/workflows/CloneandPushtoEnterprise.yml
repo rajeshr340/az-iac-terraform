@@ -1,0 +1,36 @@
+name: Clone and Push to Enterprise
+
+on:
+ workflow_dispatch: 
+
+jobs:
+  clone-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: main  # Specify the branch you want to clone
+
+    - name: Set up Git
+      run: |
+        git config user.name "rajeshr7"
+        git config user.email "rajesh.r11@kyndryl.com"
+
+    - name: Clone repository
+      run: |
+        REPO_NAME=$(basename $GITHUB_REPOSITORY)
+        git clone "https://github.com/${{ github.repository }}" cloned-repo
+
+    - name: Set up Git for Enterprise
+      run: |
+        cd cloned-repo
+        git remote add enterprise "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
+
+    - name: Push to Enterprise repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT }}    
+      run: |
+        cd cloned-repo       
+        git push -u enterprise main -f
