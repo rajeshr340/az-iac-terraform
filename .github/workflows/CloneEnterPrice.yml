@@ -26,9 +26,23 @@ jobs:
         echo 'Target Branch ${{github.base_ref}}'
         echo 'Head Branch ${{github.head_ref}}'
         echo '${{github.event.action}}'
-        echo '${{github.event.pull_request._links.comments}}'
-        echo '${{github.event.pull_request._links.html}}'
+        echo '${{github.event.pull_request._links.comments.href}}'
+        echo '${{github.event.pull_request._links.html.href}}'
         echo '${{github.event.number}}'
+        
+        echo '{
+          "ref": "${{github.ref}}",
+          "repository": "${{github.repository}}",
+          "repository_owner": "${{github.repository_owner}}",
+          "repositoryUrl": "${{github.repositoryUrl}}",
+          "run_id": "${{github.run_id}}",
+          "actor": "${{github.actor}}",
+            "head_ref": "${{github.head_ref}}",
+            "base_ref": "${{github.base_ref}}",
+            "event_name": "${{github.event_name}}",
+          "pr_url":"${{github.event.pull_request._links.html}}",
+          "pr_number":"${{github.event.number}}"
+        }'
 
     - name: Clone repository
       run: |
