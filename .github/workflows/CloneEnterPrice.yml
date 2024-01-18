@@ -1,0 +1,73 @@
+name: Clone and Push to Enterprise
+
+on:
+ workflow_dispatch: 
+ pull_request: 
+  types: 
+    - opened
+
+jobs:
+  clone-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.head_ref}} #main  # Specify the branch you want to clone
+
+    - name: Set up Git
+      run: |
+        git config user.name "rajeshr7"
+        git config user.email "rajesh.r11@kyndryl.com"
+
+    - name: Get 
+      run: |
+        echo 'Target Branch ${{github.base_ref}}'
+        echo 'Head Branch ${{github.head_ref}}'
+        echo '${{github.event.action}}'
+        echo '${{github.event.pull_request._links.comments.href}}'
+        echo '${{github.event.pull_request._links.html.href}}'
+        echo '${{github.event.number}}'              
+    - name: Clone repository
+      run: |
+        REPO_NAME=$(basename $GITHUB_REPOSITORY)
+        git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
+        git clone --branch Dev "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git" kyn-cloned-repo
+
+        cp -r ./client-cloned-repo/iac ./kyn-cloned-repo
+        echo '{
+          "ref": "${{github.ref}}",
+          "repository": "${{github.repository}}",
+          "repository_owner": "${{github.repository_owner}}",
+          "repositoryUrl": "${{github.repositoryUrl}}",
+          "run_id": "${{github.run_id}}",
+          "actor": "${{github.actor}}",
+          "head_ref": "${{github.head_ref}}",
+          "base_ref": "${{github.base_ref}}",
+          "event_name": "${{github.event_name}}",
+          "pr_url":"${{github.event.pull_request._links.html.href}}",
+          "pr_number":"${{github.event.number}}"
+        }' >>client_gitcontext.json
+        
+        cp client_gitcontext.json ./kyn-cloned-repo
+
+    - name: Set up Git for Enterprise
+      run: |
+        cd kyn-cloned-repo
+        pwd
+        ls                         
+        git remote add enterprise "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
+
+    - name: Push to Enterprise repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT }}    
+      run: |
+        cd kyn-cloned-repo       
+        # #git push -u enterprise -f
+        git config user.name "rajeshr7"
+        git config user.email "rajesh.r11@kyndryl.com"
+        git add .
+        git commit -m "iac folder updated"
+        #git push enterprise ${{github.head_ref}}:Dev -f
+        git push enterprise Dev -f
