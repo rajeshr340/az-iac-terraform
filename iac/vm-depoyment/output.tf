@@ -1,3 +1,3 @@
 variable "terraform" {
-  
+  default = "abc"
 }
