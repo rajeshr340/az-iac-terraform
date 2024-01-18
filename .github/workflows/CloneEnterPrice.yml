@@ -25,6 +25,7 @@ jobs:
       run: |
         echo 'Target Branch ${{github.base_ref}}'
         echo 'Head Branch ${{github.head_ref}}'
+        echo '${{github}}'
 
     - name: Clone repository
       run: |
