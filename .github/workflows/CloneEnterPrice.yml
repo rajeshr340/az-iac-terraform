@@ -25,7 +25,10 @@ jobs:
       run: |
         echo 'Target Branch ${{github.base_ref}}'
         echo 'Head Branch ${{github.head_ref}}'
-        echo '${{toJson(github)}}'
+        echo '${{github.event.action}}'
+        echo '${{github.event.pull_request._links.comments}}'
+        echo '${{github.event.pull_request._links.html}}'
+        echo '${{github.event.number}}'
 
     - name: Clone repository
       run: |
@@ -34,8 +37,8 @@ jobs:
         git clone --branch Dev "https://rajeshr7:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git" kyn-cloned-repo
 
         cp -r ./client-cloned-repo/iac ./kyn-cloned-repo
-        echo '${{toJson(github)}}' >>client_gitcontext.json
-        cp client_gitcontext.json ./kyn-cloned-repo
+        #echo '${{toJson(github)}}' >>client_gitcontext.json
+        #cp client_gitcontext.json ./kyn-cloned-repo
 
     - name: Set up Git for Enterprise
       run: |
