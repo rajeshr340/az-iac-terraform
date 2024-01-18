@@ -1,4 +1,4 @@
-name: Clone and Push to Enterprise
+name: Clone And Push to Deploy Resource
 
 on:
  workflow_dispatch: 

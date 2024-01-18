@@ -1,5 +1,4 @@
-name: Clone and Push to Enterprise
-
+name: Clone And Push to Code Check
 on:
  workflow_dispatch: 
  pull_request: 
