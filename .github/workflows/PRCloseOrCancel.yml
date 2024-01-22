@@ -21,10 +21,11 @@ jobs:
        echo "Closing PR: ${{env.PRNUMBER}} with Comment: ${{env.COMMENTS}}"
 
        # Use the GitHub REST API to add comments to the PR
+       COMMENT =  ${{env.COMMENTS}}
        curl -X POST \
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
          -H "Accept: application/vnd.github.v3+json" \
-         -d "{\"body\": \"${{env.COMMENTS}}\"}" \
+         -d "{\"body\": \"$COMMENT\"}" \
          "https://api.github.com/repos/${{ github.repository }}/issues/${{env.PRNUMBER}}/comments"
 
        # Close the PR using the GitHub REST API
