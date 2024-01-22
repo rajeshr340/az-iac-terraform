@@ -7,3 +7,7 @@ variable "abc" {
 variable "backend" {
   
 }
+
+variable "xy" {
+  
+}
