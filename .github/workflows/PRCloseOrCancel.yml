@@ -1,0 +1,22 @@
+name: Pull Request Close and Cancel
+
+on: 
+  repository_dispatch:
+    types: [PR_CLOSE_CANCEL]
+
+jobs:
+  PR_CLOSE_CANCEL:
+    runs-on: ubuntu-latest
+    env:
+      PRNUMBER:  ${{ github.event.client_payload.PRNUMBER }}
+      ACTION: ${{ github.event.client_payload.ACTION }}
+      COMMENTS:  ${{ github.event.client_payload.COMMENTS }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+     
+    - name: Read Request Payload
+      run: |      
+        echo "PRNUMBER: ${{env.PRNUMBER}}"
+        echo "ACTION: ${{env.ACTION}}"
+        echo "COMMENTS: ${{env.COMMENTS}}"
