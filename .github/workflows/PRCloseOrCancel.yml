@@ -40,3 +40,9 @@ jobs:
       if: ${{env.ACTION == 'CANCEL'}}
       run: |
         echo "Cancel PR"
+        # Close the PR using the GitHub REST API
+        curl -X PATCH \
+         -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -d '{"state": "closed"}' \
+         "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER"
