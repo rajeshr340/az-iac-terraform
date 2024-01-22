@@ -22,11 +22,11 @@ jobs:
         echo "COMMENTS: ${{env.COMMENTS}}"
 
     - name: Close PR
-      if: ${{env.ACTION}}=='CLOSE'
+      if: ${{env.ACTION == 'CLOSE' }}
       run: |
        echo "Closing PR"
 
     - name: Close PR
-      if: ${{env.ACTION}}=='CANCEL'
+      if: ${{env.ACTION == 'CANCEL'}}
       run: |
         echo "Cancel PR"
