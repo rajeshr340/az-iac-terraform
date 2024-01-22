@@ -5,4 +5,7 @@ terraform {
   backend "azurerm" {
     
   }
+  cloud {
+    
+  }
 }
