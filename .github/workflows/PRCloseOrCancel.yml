@@ -11,6 +11,9 @@ jobs:
       PRNUMBER:  ${{ github.event.client_payload.PRNUMBER }}
       ACTION: ${{ github.event.client_payload.ACTION }}
       COMMENTS:  ${{ github.event.client_payload.COMMENTS }}
+    permissions: 
+      write-all
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
