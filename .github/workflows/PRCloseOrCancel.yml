@@ -14,19 +14,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-     
-    - name: Read Request Payload
-      run: |      
-        echo "PRNUMBER: ${{env.PRNUMBER}}"
-        echo "ACTION: ${{env.ACTION}}"
-        echo "COMMENTS: ${{env.COMMENTS}}"
-
+      
     - name: Close PR
       if: ${{env.ACTION == 'CLOSE' }}
       run: |
        echo "Closing PR"
+       echo "PRNUMBER: ${{env.PRNUMBER}}"
+       echo "ACTION: ${{env.ACTION}}"
+       echo "COMMENTS: ${{env.COMMENTS}}"
 
-    - name: Close PR
+    - name: Cancel PR
       if: ${{env.ACTION == 'CANCEL'}}
       run: |
         echo "Cancel PR"
