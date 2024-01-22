@@ -28,7 +28,7 @@ jobs:
        curl -X POST \
          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
          -H "Accept: application/vnd.github.v3+json" \
-         -d "{\"body\": \"$COMMENT\"}" \
+         -d "{\"body\": \"${{env.COMMENTS}}\"}" \
          "https://api.github.com/repos/${{ github.repository }}/issues/${{env.PRNUMBER}}/comments"
 
        # Close the PR using the GitHub REST API
