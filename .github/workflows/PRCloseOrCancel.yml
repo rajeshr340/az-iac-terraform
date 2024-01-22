@@ -20,3 +20,13 @@ jobs:
         echo "PRNUMBER: ${{env.PRNUMBER}}"
         echo "ACTION: ${{env.ACTION}}"
         echo "COMMENTS: ${{env.COMMENTS}}"
+
+    - name: Close PR
+      if: ${{env.ACTION}}=='CLOSE'
+      run: |
+       echo "Closing PR"
+
+    - name: Close PR
+      if: ${{env.ACTION}}=='CANCEL'
+      run: |
+        echo "Cancel PR"
