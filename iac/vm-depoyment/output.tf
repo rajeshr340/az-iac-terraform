@@ -3,7 +3,5 @@ variable "terraform" {
 }
 variable "abc" {
   
-}
-variable "azurerm" {
-  
+}  
 }

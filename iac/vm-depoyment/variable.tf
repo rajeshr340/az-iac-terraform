@@ -1,3 +1,6 @@
 variable "terraform" {
   
 }
+variable "abc" {
+  
+}
