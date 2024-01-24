@@ -30,7 +30,11 @@ jobs:
           echo "Repository doesn't exist. Creating..."
           
           curl -H "Authorization: Bearer $ACCESS_TOKEN" \
-              -d '{"name":"'$REPO_NAME'"}' \
+              -d '{"name":"$REPO_NAME",
+                "description":"This is your first repository",          
+                "private":true,
+                "has_issues":true,
+                "has_projects":true,"has_wiki":true} \
               -H "Content-Type: application/json" \
               -X POST "https://github.kyndryl.net/api/v3/user/repos"
           
@@ -39,7 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT}}
                      
-    - name: Clone repository
+    - name: Clone repository      
       run: |
         REPO_NAME=$(basename $GITHUB_REPOSITORY)
         git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
