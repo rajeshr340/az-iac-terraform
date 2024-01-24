@@ -4,3 +4,6 @@ variable "terraform" {
 variable "abc" {
   
 }
+output "name" {
+  
+}
