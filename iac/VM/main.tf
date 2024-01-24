@@ -4,7 +4,7 @@ terraform {
   #  organization = "Kyndryl-CIO"
 
   #   workspaces {
-  #     name = "vm-drift-testing-1"
+  #     name = "vm-drift-testing-1"add
   #   }
   #  }
   required_providers {
