@@ -1,6 +1,0 @@
-variable "terraform" {
-  
-}
-variable "abc" {
-  
-}
