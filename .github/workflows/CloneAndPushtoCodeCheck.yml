@@ -18,6 +18,7 @@ jobs:
     - name: Check Repo exist
       run: |
         echo "REPO_NAME=$(echo ${{ github.repository }} | cut -d'/' -f2)"
+
         REPO_OWNER="${{vars.KYN_GIT_ORG}}"
         ACCESS_TOKEN="${{ secrets.KYN_GIT_PAT}}"
         
@@ -30,13 +31,9 @@ jobs:
           echo "Repository doesn't exist. Creating..."
           
           curl -H "Authorization: Bearer $ACCESS_TOKEN" \
-              -d '{"name":"$REPO_NAME",
-                "description":"This is your first repository",          
-                "private":true,
-                "has_issues":true,
-                "has_projects":true,"has_wiki":true} \
-              -H "Content-Type: application/json" \
-              -X POST "https://github.kyndryl.net/api/v3/user/repos"
+               -d '{"name":"$REPO_NAME","description":"This is your first repository","private":true,"has_issues":true,"has_projects":true,"has_wiki":true}' \
+               -H "Content-Type: application/json" \
+               -X POST "https://github.kyndryl.net/api/v3/user/repos"
           
           echo "Repository created successfully."
         fi
