@@ -1,0 +1,35 @@
+dns_prefix                      = "demo"
+location                        = "eastus"
+K8S_CLUSTERNAME                 = "aks-cluster-demo"
+default_nodepool_vm_size        = "Standard_DS2_v2"
+default_nodepool_node_count     = "3"
+default_nodepool_node_type      = "VirtualMachineScaleSets"
+akspool_name                    = "aks"
+akspool_vm_size                 = "Standard_DS2_v2"
+akspool_max_count               = 5
+akspool_min_count               = 1
+akspool_os_disk_size_gb         = 128
+akspool_os_type                 = "Linux"
+akspool_enable_auto_scaling     = true
+
+subnet                     = "node_subnet"
+rgname                         = "rg-MOCPEDemo-kcl-eastus-001"
+vnet_name                       = "aro-vnet-demo"
+service_cidrs                   = "10.1.4.0/23"
+dns_service_ip                  = "10.1.4.10"
+tags = {
+    application = "k8s Cluster"
+    ApplicationId = "MJIL-Sandbox"
+    service_area = "devops"
+    project_id = "P001"
+    owner = "MOCPE"
+    creator = "MOCPE"
+    environment = "azure-dev"
+    managed_by = "GitHub Actions - Terraform"
+    repo_change_code = "GIT_URL"
+    account_name = "MOCPE-Demo"
+    teamorproject = "Modern Ops Customer Adoption "
+    repo_change_code = "GIT_URL"
+    practice = "cloud"
+    accountid = "cloud"
+}
