@@ -15,6 +15,29 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: ${{github.head_ref}} #main  # Specify the branch you want to clone
+    - name: Check Repo exist
+      run: |
+        REPO_NAME="${{github.name}}"
+        REPO_OWNER="${{vars.KYN_GIT_ORG}}"
+        ACCESS_TOKEN="${{ secrets.KYN_GIT_PAT}}"
+        
+        RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $ACCESS_TOKEN" "https://github.kyndryl.net/api/v3/repos/$REPO_OWNER/$REPO_NAME")
+        echo "RESPONSE_CODE : $RESPONSE_CODE"
+        
+        if [ $RESPONSE_CODE -eq 200 ]; then
+          echo "Repository already exists."
+        else
+          echo "Repository doesn't exist. Creating..."
+          
+          curl -H "Authorization: Bearer $ACCESS_TOKEN" \
+              -d '{"name":"'$REPO_NAME'"}' \
+              -H "Content-Type: application/json" \
+              -X POST "https://github.kyndryl.net/api/v3/user/repos"
+          
+          echo "Repository created successfully."
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.KYN_GIT_PAT}}
                      
     - name: Clone repository
       run: |
