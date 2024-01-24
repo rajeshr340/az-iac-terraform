@@ -7,3 +7,6 @@ variable "abc" {
 output "name" {
   
 }
+output "xyz" {
+  
+}
