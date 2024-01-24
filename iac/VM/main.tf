@@ -1,12 +1,12 @@
 terraform {
-   backend "remote" {
-   hostname = "app.terraform.io"
-   organization = "Kyndryl-CIO"
+  #  backend "remote" {
+  #  hostname = "app.terraform.io"
+  #  organization = "Kyndryl-CIO"
 
-    workspaces {
-      name = "vm-drift-testing-1"
-    }
-   }
+  #   workspaces {
+  #     name = "vm-drift-testing-1"
+  #   }
+  #  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
