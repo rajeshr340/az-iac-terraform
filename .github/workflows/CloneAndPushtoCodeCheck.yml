@@ -16,9 +16,8 @@ jobs:
       with:
         ref: ${{github.head_ref}} #main  # Specify the branch you want to clone
     - name: Check Repo exist
-      run: |
-        echo "REPO_NAME=$(echo ${{ github.repository }} | cut -d'/' -f2)"
-
+      run: |                
+        REPO_NAME="${{ github.event.pull_request.base.repo.name }}"
         REPO_OWNER="${{vars.KYN_GIT_ORG}}"
         ACCESS_TOKEN="${{ secrets.KYN_GIT_PAT}}"
         
