@@ -16,7 +16,7 @@ jobs:
       with:
         ref: ${{github.head_ref}} #main  # Specify the branch you want to clone
                      
-    - name: Clone repository
+    - name: Clone repository      
       run: |
         REPO_NAME=$(basename $GITHUB_REPOSITORY)
         git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
