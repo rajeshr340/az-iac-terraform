@@ -22,8 +22,7 @@ jobs:
     - name: Clone repository      
       run: |
         REPO_NAME=$(basename $GITHUB_REPOSITORY)
-        git clone --force --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
-
+        git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
         git clone --branch Dev "https://${{secrets.KYN_GIT_USER}}:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git" kyn-cloned-repo
 
         cp -r ./client-cloned-repo/iac ./kyn-cloned-repo
