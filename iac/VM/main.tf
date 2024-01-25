@@ -18,7 +18,7 @@ provider "azurerm" {
   #  subscription_id = var.subscription_id
 }
 
-# Get Resources from a Resource Group
+# Get Resources from a Resource Group ####
 data "azurerm_resources" "rgname" {
   resource_group_name = var.rgname
 }
