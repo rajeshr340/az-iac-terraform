@@ -8,7 +8,7 @@ terraform {
     }
 }
 
-
+#modified tf file
 provider "azurerm" {
   features {}
 
