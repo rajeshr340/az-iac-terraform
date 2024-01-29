@@ -19,9 +19,9 @@ jobs:
     - name: Clone repository      
       run: |
         REPO_NAME=$(basename $GITHUB_REPOSITORY)
-        git clone --branch ${{github.head_ref}} "https://github.com/${{ github.repository }}" client-cloned-repo
+        git clone --branch ${{github.head_ref}} "https://${{secrets.ENERGYNET_GIT_HOSTNAME}}/${{ github.repository }}" client-cloned-repo
 
-        git clone --branch Dev "https://${{secrets.KYN_GIT_USER}}:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git" kyn-cloned-repo
+        git clone --branch Dev "https://${{secrets.KYN_GIT_USER}}:${{secrets.KYN_GIT_PAT }}@${{secrets.KYN_GIT_HOSTNAME }}/${{secrets.KYN_GIT_REPOSITORY}}.git" kyn-cloned-repo
 
         cp -r ./client-cloned-repo/iac ./kyn-cloned-repo
         echo '{
@@ -43,7 +43,7 @@ jobs:
     - name: Set up Git for Enterprise
       run: |
         cd kyn-cloned-repo                       
-        git remote add enterprise "https://${{secrets.KYN_GIT_USER }}:${{secrets.KYN_GIT_PAT }}@github.kyndryl.net/cloud-practice-engineering/az-terraform-iac.git"
+        git remote add enterprise "https://${{secrets.KYN_GIT_USER }}:${{secrets.KYN_GIT_PAT }}@${{secrets.KYN_GIT_HOSTNAME }}/${{secrets.KYN_GIT_REPOSITORY}}.git"
 
     - name: Push to Enterprise repository
       env:
@@ -55,4 +55,4 @@ jobs:
         git add .
         git commit -m "iac code updated and pushed for Traceability check Clinet PR No# ${{github.event.number }}"
         #git push enterprise ${{github.head_ref}}:Dev -f
-        git push enterprise Dev -f
+        git push enterprise ${{secrets.KYN_GIT_TRACEABILITY_BRANCH}} -f
