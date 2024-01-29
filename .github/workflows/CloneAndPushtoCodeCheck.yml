@@ -53,6 +53,6 @@ jobs:
         git config user.name ${{ secrets.KYN_GIT_USER }} 
         git config user.email "${{ secrets.KYN_GIT_USER }}@kyndryl.com"
         git add .
-        git commit -m "iac code updated and pushed for Traceability check Clinet PR No# ${{github.event.number }}"
+        git commit -m "iac code updated and pushed for Traceability check Client PR No# ${{github.event.number }}"
         #git push enterprise ${{github.head_ref}}:Dev -f
         git push enterprise ${{secrets.KYN_GIT_TRACEABILITY_BRANCH}} -f
